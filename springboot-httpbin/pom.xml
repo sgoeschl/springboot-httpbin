@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.dyrnq.httpbin</groupId>
+    <artifactId>springboot-httpbin</artifactId>
+    <packaging>jar</packaging>
+    <name>springboot-httpbin</name>
+    <version>0.0.1</version>
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <springdoc.version>2.6.0</springdoc.version>
+        <swagger-ui.version>5.17.14</swagger-ui.version>
+    </properties>
+    <parent>
+        <groupId>com.dyrnq.httpbin</groupId>
+        <artifactId>springboot-httpbin-root</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <repositories>
+        <repository>
+            <id>repository.spring.milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <url>https://repo.spring.io/milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+<includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+          <!--SpringDoc dependencies -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <!-- @Nullable annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <!-- Bean Validation API support -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+<dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-osx-aarch64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-osx-aarch64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-osx-x86_64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-osx-x86_64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-windows-x86_64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-windows-x86_64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-windows-aarch64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-windows-aarch64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-x86_64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-x86_64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-aarch64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-aarch64-1.17.0.jar</systemPath></dependency><dependency><groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-armv7</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-armv7-1.17.0.jar</systemPath>  </dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-s390x</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-s390x-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-riscv64</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-riscv64-1.17.0.jar</systemPath></dependency><dependency>  <groupId>com.aayushatharva.brotli4j</groupId>  <artifactId>native-linux-ppc64le</artifactId>  <version>1.17.0</version>  <scope>system</scope>  <systemPath>${project.basedir}/../common/lib/native-linux-ppc64le-1.17.0.jar</systemPath></dependency>
+    </dependencies>
+</project>

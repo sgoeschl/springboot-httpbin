@@ -1,0 +1,1270 @@
+openapi: 3.1.0
+info:
+  title: FastAPI Httpbin
+  description: "\n<a href=\"static/logo.png\"><img src=\"static/logo.png\" align=\"\
+    right\" /></a>\n\nHTTP Endpoints for easy testing of your app.\n\nBuilt with the\
+    \ <a href=\"https://fastapi.tiangolo.com/\">FastAPI framework</a>, \nthis is heavily\
+    \ based on the original <a href=\"https://httpbin.org/\">Httpbin</a> website.\n\
+    \n<a href=\"/about\">About this project</a> - \n<a href=\"/roadmap\">Development\
+    \ Roadmap</a> -\n<a href=\"/qrcode/\">Dead Simple QR Code Generator</a> -\n<a\
+    \ href=\"/test-password-manager-form/\">Form for testing Password Managers like\
+    \ 1Password and BitWarden</a>\n<p>\n\n<a href=\"https://github.com/dmuth/fastapi-httpbin\"\
+    >GitHub repo</a>\n<p>\n\nRun locally in Docker: <tt><b>docker run -p 80:80 dmuth1/fastapi-httpbin</b></tt>\n\
+    \n<a href=\"https://httpbin.dmuth.org/\">Main Site</a> - Mirrors: \n<a href=\"\
+    https://fly.httpbin.dmuth.org/\">Fly</a>\n<a href=\"https://railway.httpbin.dmuth.org/\"\
+    >Railway</a>\n<a href=\"https://render.httpbin.dmuth.org/\">Render</a>\n\n"
+  version: 0.0.51
+servers:
+- url: /
+tags:
+- name: HTTP Methods
+  description: Testing different HTTP verbs.
+- name: Request Inspection
+  description: Inspect the request data. (including source IP address)
+- name: Responses
+  description: Inspect response data like caching and headers.
+- name: Response Formats
+  description: Returns responses in different formats.
+- name: QR Codes
+  description: Generate QR Codes.
+- name: Dynamic Data
+  description: Generate random and dynamic data.
+- name: Status Codes
+  description: Generate responses with specified status codes.
+- name: Redirects
+  description: Return different redirects.
+- name: Anything
+  description: Return anything that is passed in on the request.
+- name: Cookies
+  description: "Create, read, and delete cookies."
+- name: Images
+  description: Return different image formats.
+- name: Forms
+  description: Endpoints for testing out forms.
+- name: Meta
+  description: Endpoints related to this app itself.
+paths:
+  /get:
+    get:
+      tags:
+      - HTTP Methods
+      summary: The request's GET parameters.
+      operationId: get_get_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /get/args:
+    get:
+      tags:
+      - HTTP Methods
+      summary: "JUST the request's GET parameters, without extra environment data."
+      operationId: get_get_args_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /post:
+    post:
+      tags:
+      - HTTP Methods
+      summary: The request's POST parameters. (Use -d in curl to specify data in JSON
+        format)
+      operationId: post_post_post
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /put:
+    put:
+      tags:
+      - HTTP Methods
+      summary: The request's PUT parameters. (Use -d in curl to specify data in JSON
+        format)
+      operationId: put_put_put
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /patch:
+    patch:
+      tags:
+      - HTTP Methods
+      summary: The request's PATCH parameters. (Use -d in curl to specify data in
+        JSON format)
+      operationId: patch_patch_patch
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /delete:
+    delete:
+      tags:
+      - HTTP Methods
+      summary: The request's DELETE parameters.
+      operationId: delete_delete_delete
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /status/{codes}:
+    get:
+      tags:
+      - Status Codes
+      summary: Return status code or random one if multiple given as comma-delimited
+        list (Underscores are also permitted as delimiters)
+      operationId: get_status__codes__get
+      parameters:
+      - name: codes
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Codes
+          minLength: 3
+          pattern: "^[0-9,_]+$"
+        example: "200,201,204"
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Status Codes
+      summary: Return status code or random one if multiple given as comma-delimited
+        list (Underscores are also permitted as delimiters)
+      operationId: get_status__codes__put
+      parameters:
+      - name: codes
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Codes
+          minLength: 3
+          pattern: "^[0-9,_]+$"
+        example: "200,201,204"
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Status Codes
+      summary: Return status code or random one if multiple given as comma-delimited
+        list (Underscores are also permitted as delimiters)
+      operationId: get_status__codes__post
+      parameters:
+      - name: codes
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Codes
+          minLength: 3
+          pattern: "^[0-9,_]+$"
+        example: "200,201,204"
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Status Codes
+      summary: Return status code or random one if multiple given as comma-delimited
+        list (Underscores are also permitted as delimiters)
+      operationId: get_status__codes__delete
+      parameters:
+      - name: codes
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Codes
+          minLength: 3
+          pattern: "^[0-9,_]+$"
+        example: "200,201,204"
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Status Codes
+      summary: Return status code or random one if multiple given as comma-delimited
+        list (Underscores are also permitted as delimiters)
+      operationId: get_status__codes__patch
+      parameters:
+      - name: codes
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Codes
+          minLength: 3
+          pattern: "^[0-9,_]+$"
+        example: "200,201,204"
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /headers:
+    get:
+      tags:
+      - Request Inspection
+      summary: Return the headers sent in the request.
+      operationId: get_headers_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /ip:
+    get:
+      tags:
+      - Request Inspection
+      summary: Return the user's IP address.
+      operationId: ip_ip_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /ip/v4:
+    get:
+      tags:
+      - Request Inspection
+      summary: Return the user's IPv4 address (if present).
+      operationId: ipv4_ip_v4_get
+      responses:
+        "200":
+          description: "Return the user's IPv4 address, if present."
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Returned if user came in over IPv6
+  /ip/v6:
+    get:
+      tags:
+      - Request Inspection
+      summary: Return the user's IPv6 address (if present).
+      operationId: ipv6_ip_v6_get
+      responses:
+        "200":
+          description: "Return the user's IPv6 address, if present."
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Returned if user came in over IPv4
+  /user-agent:
+    get:
+      tags:
+      - Request Inspection
+      summary: Request the User Agent.
+      operationId: user_agent_user_agent_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /cache:
+    get:
+      tags:
+      - Responses
+      summary: Returns a 304 if an If-Modified-Since header or If-None-Match is present.
+        Returns the same as a GET otherwise.
+      operationId: cache_cache_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /cache/{seconds}:
+    get:
+      tags:
+      - Responses
+      summary: Sets a Cache-Control header for n seconds.
+      operationId: cache_seconds_cache__seconds__get
+      parameters:
+      - name: seconds
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Seconds
+        example: 3
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /etag/{etag}:
+    get:
+      tags:
+      - Responses
+      summary: Assumes the resource has the given etag and responds to If-None-Match
+        and If-Match headers appropriately.
+      operationId: etag_etag__etag__get
+      parameters:
+      - name: etag
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Etag
+        example: test-etag
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /response-headers:
+    get:
+      tags:
+      - Responses
+      summary: Set arbitrary headers in the response.  Input strings should be in
+        the format of 'header:value'.
+      operationId: response_headers_get_response_headers_get
+      parameters:
+      - name: headers
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Headers
+          items: {}
+          default: []
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /html:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns an HTML document.
+      operationId: html_html_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            text/html:
+              schema: {}
+  /json:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns a JSON document.
+      operationId: json_json_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /robots.txt:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns some robots.txt rules.
+      operationId: robots_txt_robots_txt_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /deny:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns a page denied by rules in robots.txt.
+      operationId: deny_deny_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /xml:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns an XML document
+      operationId: xml_xml_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /encoding/utf8:
+    get:
+      tags:
+      - Response Formats
+      summary: Returns a UTF-8 Encoded body.
+      operationId: utf8_encoding_utf8_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /qrcode/form:
+    post:
+      tags:
+      - QR Codes
+      summary: Returns a QR Code in PNG format from form submission.
+      operationId: qrcode_post_form_qrcode_form_post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_qrcode_post_form_qrcode_form_post'
+        required: true
+      responses:
+        "200":
+          description: Return a QR Code in PNG format.
+          content:
+            image/png: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /qrcode/json:
+    post:
+      tags:
+      - QR Codes
+      summary: Returns a QR code in PNG format from POSTed JSON.
+      operationId: qrcode_post_qrcode_json_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QRCode'
+        required: true
+      responses:
+        "200":
+          description: Return a QR Code in PNG format.
+          content:
+            image/png: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /redirect/{n}:
+    get:
+      tags:
+      - Redirects
+      summary: "302 Redirects n times. (Note that Swagger follows redirects, so use\
+        \ the Curl command to see redirect headers."
+      operationId: get_redirect__n__get
+      parameters:
+      - name: "n"
+        in: path
+        description: Number of redirects to perform
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+          description: Number of redirects to perform
+        example: 3
+      - name: code
+        in: query
+        description: Status code passed in from a previous redirect
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Code
+          description: Status code passed in from a previous redirect
+          anyOf:
+          - {}
+          - {}
+          default: 302
+        example: 301
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Redirects
+      summary: "302 Redirects n times. (Note that Swagger follows redirects, so use\
+        \ the Curl command to see redirect headers."
+      operationId: put_redirect__n__put
+      parameters:
+      - name: "n"
+        in: path
+        description: Number of redirects to perform
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+          description: Number of redirects to perform
+        example: 3
+      - name: code
+        in: query
+        description: Status code passed in from a previous redirect
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Code
+          description: Status code passed in from a previous redirect
+          anyOf:
+          - {}
+          - {}
+          default: 302
+        example: 301
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Redirects
+      summary: "302 Redirects n times. (Note that Swagger follows redirects, so use\
+        \ the Curl command to see redirect headers."
+      operationId: post_redirect__n__post
+      parameters:
+      - name: "n"
+        in: path
+        description: Number of redirects to perform
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+          description: Number of redirects to perform
+        example: 3
+      - name: code
+        in: query
+        description: Status code passed in from a previous redirect
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Code
+          description: Status code passed in from a previous redirect
+          anyOf:
+          - {}
+          - {}
+          default: 302
+        example: 301
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Redirects
+      summary: "302 Redirects n times. (Note that Swagger follows redirects, so use\
+        \ the Curl command to see redirect headers."
+      operationId: delete_redirect__n__delete
+      parameters:
+      - name: "n"
+        in: path
+        description: Number of redirects to perform
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+          description: Number of redirects to perform
+        example: 3
+      - name: code
+        in: query
+        description: Status code passed in from a previous redirect
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Code
+          description: Status code passed in from a previous redirect
+          anyOf:
+          - {}
+          - {}
+          default: 302
+        example: 301
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - Redirects
+      summary: "302 Redirects n times. (Note that Swagger follows redirects, so use\
+        \ the Curl command to see redirect headers."
+      operationId: patch_redirect__n__patch
+      parameters:
+      - name: "n"
+        in: path
+        description: Number of redirects to perform
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+          description: Number of redirects to perform
+        example: 3
+      - name: code
+        in: query
+        description: Status code passed in from a previous redirect
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Code
+          description: Status code passed in from a previous redirect
+          anyOf:
+          - {}
+          - {}
+          default: 302
+        example: 301
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /anything:
+    get:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: get_anything_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    put:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: put_anything_put
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: post_anything_post
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    delete:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: delete_anything_delete
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    head:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: get_anything_head
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    patch:
+      tags:
+      - Anything
+      summary: Returns anything that is passed into the request.
+      operationId: patch_anything_patch
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /cookies:
+    get:
+      tags:
+      - Cookies
+      summary: Show current cookies in the browser.
+      operationId: get_cookies_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    put:
+      tags:
+      - Cookies
+      summary: Set one or more cookies.
+      operationId: put_cookies_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Cookies
+              anyOf:
+              - {}
+              - {}
+            example: "{\"cookie1\": \"value1\", \"cookie2\": \"value2\", \"cookie3\"\
+              : \"value3\"}"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Cookies
+      summary: Delete one or more cookies.
+      operationId: delete_cookies_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Cookies
+              anyOf:
+              - items: {}
+              - {}
+            example: "[\"cookie1\", \"cookie2\", \"cookie3\"]"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /images/jpeg:
+    get:
+      tags:
+      - Images
+      summary: Returns a JPEG image.
+      operationId: get_images_jpeg_get
+      responses:
+        "200":
+          description: Return an image in JPG format.
+          content:
+            image/jpeg: {}
+  /images/png:
+    get:
+      tags:
+      - Images
+      summary: Returns a PNG image.
+      operationId: get_images_png_get
+      responses:
+        "200":
+          description: Return an image in PNG format.
+          content:
+            image/png: {}
+  /images/heic:
+    get:
+      tags:
+      - Images
+      summary: Returns a HEIC image. (This may not be displayed correctly in some
+        browsers)
+      operationId: get_images_heic_get
+      responses:
+        "200":
+          description: Return an image in HEIC format.
+          content:
+            image/heic: {}
+  /images/webp:
+    get:
+      tags:
+      - Images
+      summary: Returns a Webp image.
+      operationId: get_images_webp_get
+      responses:
+        "200":
+          description: Return an image in Webp format.
+          content:
+            image/webp: {}
+  /uuid:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Return a type 4 UUID.
+      operationId: uuid_uuid_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /uuid/qrcode:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Return a QR code of a type 4 UUID.
+      operationId: uuid_qrcode_uuid_qrcode_get
+      responses:
+        "200":
+          description: Return a QR Code in PNG format.
+          content:
+            image/png: {}
+  /uuid/qrcode/{uuid}:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Return a QR code of a *specified* type 4 UUID.
+      operationId: uuid_qrcode_qrcode_uuid_qrcode__uuid__get
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Uuid
+      responses:
+        "200":
+          description: Return a QR Code in PNG format.
+          content:
+            image/png: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /delay/{seconds}:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Return a delayed response (max of 10 seconds).
+      operationId: delay_delay__seconds__get
+      parameters:
+      - name: seconds
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Seconds
+        example: 3
+      - name: debug
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Debug
+          anyOf:
+          - {}
+          - {}
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /stream/{n}:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Steam n JSON responses.  (max of 100)
+      operationId: stream_stream__n__get
+      parameters:
+      - name: "n"
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+        example: 3
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /stream/chars/{n}/{rate}:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Stream n bytes (max 100K) at a rate of rate per second. Max time is
+        20 seconds.
+      operationId: stream_chars_stream_chars__n___rate__get
+      parameters:
+      - name: "n"
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+        example: 128
+      - name: rate
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Rate
+        example: 50
+      - name: debug
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Debug
+          anyOf:
+          - {}
+          - {}
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /stream/chars/complete/{n}/{rate}:
+    get:
+      tags:
+      - Dynamic Data
+      summary: Stream n bytes (max 100K) at a rate of rate per second. Any outstanding
+        characters due to a low rate will be sent at the very end.  Max time is 10
+        seconds.
+      operationId: stream_chars_complete_stream_chars_complete__n___rate__get
+      parameters:
+      - name: "n"
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: "N"
+        example: 128
+      - name: rate
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          title: Rate
+        example: 50
+      - name: debug
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: Debug
+          anyOf:
+          - {}
+          - {}
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /test-password-manager-form/post:
+    post:
+      tags:
+      - Forms
+      summary: Process a sample login
+      operationId: test_password_manager_form_test_password_manager_form_post_post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_test_password_manager_form_test_password_manager_form_post_post'
+        required: true
+      responses:
+        "200":
+          description: "Valid credentials were supplied. (username: dmuth, password:\
+            \ password)"
+        "401":
+          description: Invalid credentials were supplied
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /version:
+    get:
+      tags:
+      - Meta
+      summary: The version of this app.
+      operationId: version_version_get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /favicon.ico:
+    get:
+      tags:
+      - Images
+      summary: Favicon endpoint
+      operationId: favicon_favicon_ico_get
+      responses:
+        "200":
+          description: Return a 32x32 favicon in JPG format.
+          content:
+            image/jpeg: {}
+  /static/logo.png:
+    get:
+      tags:
+      - Images
+      summary: Logo endpoint
+      operationId: logo_static_logo_png_get
+      responses:
+        "200":
+          description: Return the logo.
+          content:
+            image/jpeg: {}
+components:
+  schemas:
+    Body_qrcode_post_form_qrcode_form_post:
+      title: Body_qrcode_post_form_qrcode_form_post
+      required:
+      - border
+      - box_size
+      - url
+      properties:
+        url:
+          title: Url
+        box_size:
+          title: Box Size
+        border:
+          title: Border
+    Body_test_password_manager_form_test_password_manager_form_post_post:
+      title: Body_test_password_manager_form_test_password_manager_form_post_post
+      required:
+      - password
+      - username
+      properties:
+        username:
+          title: Username
+        password:
+          title: Password
+    HTTPValidationError:
+      title: HTTPValidationError
+      properties:
+        detail:
+          title: Detail
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    QRCode:
+      title: QRCode
+      required:
+      - url
+      properties:
+        url:
+          title: Url
+          maxLength: 1000
+          minLength: 10
+        box_size:
+          title: Box Size
+          maximum: 20.0
+          default: 10
+        border:
+          title: Border
+          maximum: 20.0
+          default: 2
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      properties:
+        loc:
+          title: Location
+          items:
+            anyOf:
+            - {}
+            - {}
+        msg:
+          title: Message
+        type:
+          title: Error Type
