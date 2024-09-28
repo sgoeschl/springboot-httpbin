@@ -195,7 +195,7 @@ public class BaseService {
                 location = StrUtil.removeSuffix(openapiControllerBasePath, "/") + location;
             }
             if (absolute) {
-                fullLocation = ServletUriComponentsBuilder.fromCurrentServletMapping().path(location).build().toUriString();
+                fullLocation = ServletUriComponentsBuilder.fromCurrentServletMapping().path(location).scheme(getScheme()).build().toUriString();
             } else {
                 fullLocation = ServletUriComponentsBuilder.fromCurrentServletMapping().path(location).build().getPath();
             }
@@ -345,5 +345,13 @@ public class BaseService {
             ipAddress = getHttpServletRequest().getRemoteAddr();
         }
         return ipAddress;
+    }
+
+    protected String getScheme(){
+        String scheme = request.getHeader("X-Forwarded-Proto");
+        if (scheme == null || scheme.length() == 0 || "unknown".equalsIgnoreCase(scheme)) {
+            scheme = getHttpServletRequest().getScheme();
+        }
+        return scheme;
     }
 }
