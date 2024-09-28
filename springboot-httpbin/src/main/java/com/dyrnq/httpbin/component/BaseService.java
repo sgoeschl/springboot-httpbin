@@ -327,9 +327,23 @@ public class BaseService {
         response.put("method", getHttpServletRequest().getMethod());
         response.put("args", jsonObject(queryParamMap()));
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         rsOk(os, response);
         return null;
+    }
+
+    protected String getOrigin() {
+        String ipAddress = request.getHeader("X-Forwarded-For");
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = getHttpServletRequest().getRemoteAddr();
+        }
+        return ipAddress;
     }
 }

@@ -32,7 +32,7 @@ public class ResponseFormatsService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         response.put("gzipped", true);
 
@@ -59,7 +59,7 @@ public class ResponseFormatsService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         response.put("deflated", true);
 
@@ -210,7 +210,7 @@ public class ResponseFormatsService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         response.put("brotli", true);
 
@@ -241,7 +241,7 @@ public class ResponseFormatsService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         response.put("zstded", true);
 

@@ -69,7 +69,7 @@ public class DynamicDataService extends BaseService {
         response.put("method", getHttpServletRequest().getMethod());
         response.put("args", jsonObject(queryParamMap()));
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         rsOk(os, response);
         return null;
@@ -125,7 +125,7 @@ public class DynamicDataService extends BaseService {
             JSONObject response = new JSONObject();
             response.put("args", mapParametersToJSON());
             response.put("headers", mapHeadersToJSON());
-            response.put("origin", servletRequest.getRemoteAddr());
+            response.put("origin", getOrigin());
             response.put("url", getFullURL());
             response.put("id", i);
 

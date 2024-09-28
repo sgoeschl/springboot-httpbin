@@ -41,7 +41,7 @@ public class ResponseInspectionService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
 
         // 获取当前时间
@@ -73,7 +73,7 @@ public class ResponseInspectionService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", mapParametersToJSON());
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         servletResponse.setHeader("Cache-Control", "public, max-age=" + value);
         rsOk(os, response);
@@ -110,7 +110,7 @@ public class ResponseInspectionService extends BaseService {
         JSONObject response = new JSONObject();
         response.put("args", jsonObject(queryParamMap()));
         response.put("headers", mapHeadersToJSON());
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         response.put("url", getFullURL());
         rsOk(os, response);
 

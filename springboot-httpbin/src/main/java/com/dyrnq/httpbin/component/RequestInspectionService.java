@@ -19,7 +19,7 @@ public class RequestInspectionService extends BaseService {
         OutputStream os = servletResponse.getOutputStream();
 
         JSONObject response = new JSONObject();
-        response.put("origin", servletRequest.getRemoteAddr());
+        response.put("origin", getOrigin());
         rsOk(os, response);
 
         return null;
