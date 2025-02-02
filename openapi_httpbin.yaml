@@ -31,6 +31,8 @@ tags:
     description: Returns different redirect responses
   - name: Anything
     description: Returns anything that is passed to request
+  - description: Supports performance test related functionality
+    name: Performance
 paths:
   /absolute-redirect/{n}:
     get:
@@ -1153,5 +1155,44 @@ paths:
         "200":
           description: An XML document.
           content: {}
+  /performance/gc-pause:
+    get:
+      summary: Simulates a repeated "stop the world" GC pause
+      parameters:
+        - in: query
+          name: response_time
+          description: The response time (in milliseconds) when not simulating a GC pause
+          required: false
+          schema:
+            default: 100
+            type: integer
+            format: int64
+        - in: query
+          name: interval_repetition
+          description: The repeating interval (in seconds) of the simulated GC pausse
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: interval_duration
+          description: The amount of time (in seconds) to block all requests during the simulated GC pause
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          content: {}
+          description: A non-delayed response.
+        "202":
+          content: {}
+          description: A delayed response.
+      tags:
+        - Performance
+      x-accepts:
+        - application/json
+      x-tags:
+        - tag: Performance
 components: {}
 x-original-swagger-version: "2.0"

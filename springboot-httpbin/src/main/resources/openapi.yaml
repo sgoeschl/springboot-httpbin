@@ -31,6 +31,8 @@ tags:
   name: Redirects
 - description: Returns anything that is passed to request
   name: Anything
+- description: Supports performance test related functionality
+  name: Performance
 paths:
   /absolute-redirect/{n}:
     get:
@@ -1556,6 +1558,53 @@ paths:
       - application/json
       x-tags:
       - tag: Response formats
+  /performance/gc-pause:
+    get:
+      parameters:
+      - description: The response time (in milliseconds) when not simulating a GC
+          pause
+        explode: true
+        in: query
+        name: response_time
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+        style: form
+      - description: The repeating interval (in seconds) of the simulated GC pausse
+        explode: true
+        in: query
+        name: interval_repetition
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: The amount of time (in seconds) to block all requests during
+          the simulated GC pause
+        explode: true
+        in: query
+        name: interval_duration
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: A non-delayed response.
+        "202":
+          content: {}
+          description: A delayed response.
+      summary: Simulates a repeated "stop the world" GC pause
+      tags:
+      - Performance
+      x-accepts:
+      - application/json
+      x-tags:
+      - tag: Performance
 components:
   schemas:
     _redirect_to_put_request:
